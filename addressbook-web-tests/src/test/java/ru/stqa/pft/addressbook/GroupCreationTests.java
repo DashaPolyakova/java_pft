@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook;
 
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
@@ -15,50 +16,59 @@ import org.openqa.selenium.*;
 import static org.openqa.selenium.OutputType.*;
 
 public class GroupCreationTests {
-    FirefoxDriver wd;
-    
+ //   FirefoxDriver wd;
+    public WebDriver driver;
     @BeforeMethod
     public void setUp() throws Exception {
-        wd = new FirefoxDriver();
-        wd.manage().timeouts().implicitlyWait(360, TimeUnit.SECONDS);
-        wd.get("http://localhost/addressbook/group.php");
-        wd.findElement(By.name("pass")).click();
-        wd.findElement(By.name("user")).clear();
-        wd.findElement(By.name("user")).sendKeys("admin");
-        wd.findElement(By.name("pass")).click();
-        wd.findElement(By.name("pass")).clear();
-        wd.findElement(By.name("pass")).sendKeys("secret");
-        wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
+        System.setProperty("webdriver.chrome.driver","C:/Users/fbi/Downloads/chromedriver_win32/chromedriver.exe");
+        driver = new ChromeDriver();
+        //System.setProperty("gecko.driver","C:/Users/fbi/Downloads/geckodriver/geckodriver.exe");
+        //driver = new FirefoxDriver();
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        driver.get("http://localhost/addressbook/group.php");
+
     }
+
     
     @Test
-    public void testGroupCreation() {
-        wd.findElement(By.linkText("groups")).click();
-        wd.findElement(By.name("new")).click();
-        wd.findElement(By.name("group_name")).click();
-        wd.findElement(By.name("group_name")).clear();
-        wd.findElement(By.name("group_name")).sendKeys("test1");
-        wd.findElement(By.name("group_header")).click();
-        wd.findElement(By.name("group_header")).clear();
-        wd.findElement(By.name("group_header")).sendKeys("test2");
-        wd.findElement(By.name("group_footer")).click();
-        wd.findElement(By.name("group_footer")).clear();
-        wd.findElement(By.name("group_footer")).sendKeys("test3");
-        wd.findElement(By.name("submit")).click();
-        wd.findElement(By.linkText("group page")).click();
+    public void testGroupCreation() throws InterruptedException {
+     //   wd.findElement(By.name("pass")).click();
+
+       /* driver.findElement(By.name("db_name")).clear();
+        driver.findElement(By.name("db_name")).sendKeys("DAsha molodec");
+        Thread.sleep(4000);*/
+        driver.findElement(By.name("user")).clear();
+        driver.findElement(By.name("user")).sendKeys("admin");
+        driver.findElement(By.name("pass")).click();
+        driver.findElement(By.name("pass")).clear();
+        driver.findElement(By.name("pass")).sendKeys("secret");
+        driver.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
+        driver.findElement(By.linkText("groups")).click();
+        driver.findElement(By.name("new")).click();
+        driver.findElement(By.name("group_name")).click();
+        driver.findElement(By.name("group_name")).clear();
+        driver.findElement(By.name("group_name")).sendKeys("test1");
+        driver.findElement(By.name("group_header")).click();
+        driver.findElement(By.name("group_header")).clear();
+        driver.findElement(By.name("group_header")).sendKeys("test2");
+        driver.findElement(By.name("group_footer")).click();
+        driver.findElement(By.name("group_footer")).clear();
+        driver.findElement(By.name("group_footer")).sendKeys("test3");
+        driver.findElement(By.name("submit")).click();
+        driver.findElement(By.linkText("group page")).click();
     }
     
     @AfterMethod
     public void tearDown() {
-        wd.quit();
+        driver.quit();
     }
     
-    public static boolean isAlertPresent(FirefoxDriver wd) {
-        try {
-            wd.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
-    }
+//    public static boolean isAlertPresent(FirefoxDriver wd) {
+//        try {
+//            driver.switchTo().alert();
+//            return true;
+//        } catch (NoAlertPresentException e) {
+//            return false;
+//        }
+//    }
 }
