@@ -1,7 +1,8 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.tests;
 
 
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 public class GroupCreationTests extends TestBase {
 
@@ -13,11 +14,11 @@ public class GroupCreationTests extends TestBase {
        /* driver.findElement(By.name("db_name")).clear();
         driver.findElement(By.name("db_name")).sendKeys("DAsha molodec");
         Thread.sleep(4000);*/
-        gotoGroupPage();
-        initGroupCreation();
-        fillGroupForm(new GroupData("test1", "test2", "test3"));
-        submitGroupCreation();
-        returnToGroupPage();
+        app.getNavigationHelper().gotoGroupPage();
+        app.getGroupHelper().initGroupCreation();
+        app.getGroupHelper().fillGroupForm(new GroupData("test1", "test2", "test3"));
+        app.getGroupHelper().submitGroupCreation();
+        app.getGroupHelper().returnToGroupPage();
     }
 
     //    public static boolean isAlertPresent(FirefoxDriver wd) {
